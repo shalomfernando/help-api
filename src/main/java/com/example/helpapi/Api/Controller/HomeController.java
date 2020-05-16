@@ -1,4 +1,4 @@
-package com.example.helpapi.Controller;
+package com.example.helpapi.Api.Controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
