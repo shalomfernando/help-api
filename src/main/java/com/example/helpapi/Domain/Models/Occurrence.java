@@ -6,7 +6,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -54,15 +53,11 @@ public class Occurrence {
 	private String image;
 
 	
-	
-	
 	public Occurrence() {
-		super();
 	}
 
 	public Occurrence(int id, String occurrence_type, Address address, double longitude, double latitude,
 			String description, Calendar date, String pathFoto, Customer customer, String image) {
-		super();
 		this.id = id;
 		this.occurrence_type = occurrence_type;
 		this.address = address;
