@@ -6,9 +6,10 @@ import com.example.helpapi.Domain.Config.Notifications;
 import com.example.helpapi.Domain.Models.Customer;
 import com.example.helpapi.Infra.Repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.RequestEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
@@ -17,6 +18,10 @@ import java.util.Optional;
 
 @Service
 public class CustomerService extends Notifications {
+	
+	public String user;
+	public String pass;
+	
     private final CustomerRepository _repository;
 
     @Autowired
@@ -47,4 +52,22 @@ public class CustomerService extends Notifications {
         }
         return ResponseEntity.ok(customer.get());
     }
+
+	public Customer login(String name,String password) {
+		this.user = name;
+		this.pass = password;
+		Customer customer = _repository.findByNameAndPassword(name,password);
+		if( customer != null )
+			return customer;
+		else
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	}
+	
+	public Customer getThisUser() {
+		Customer customer = _repository.findByNameAndPassword(user,pass);
+		if( customer != null )
+			return customer;
+		else
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+	}
 }

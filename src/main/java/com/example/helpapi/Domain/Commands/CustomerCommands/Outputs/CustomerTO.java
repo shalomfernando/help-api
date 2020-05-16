@@ -6,8 +6,9 @@ import lombok.Getter;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.val;
 
-@Getter
+
 public class CustomerTO {
     private String Name;
     private String Email;
@@ -20,4 +21,16 @@ public class CustomerTO {
     public static List<CustomerTO> Converter(List<Customer> customer){
         return customer.stream().map(CustomerTO::new).collect(Collectors.toList());
     }
+
+	public String getName() {
+		return Name;
+	}
+
+	public String getEmail() {
+		return Email;
+	}
+
+    
+    
 }
+

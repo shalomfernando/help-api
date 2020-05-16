@@ -2,6 +2,7 @@ package com.example.helpapi.Api.Controller;
 
 import com.example.helpapi.Domain.Commands.CustomerCommands.Inputs.SaveCustomerCommand;
 import com.example.helpapi.Domain.Commands.CustomerCommands.Outputs.CustomerTO;
+import com.example.helpapi.Domain.Models.Customer;
 import com.example.helpapi.Domain.Services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.RequestEntity;
@@ -15,7 +16,9 @@ import java.util.List;
 @RequestMapping("api/Customer")
 public class CustomerController {
     private CustomerService _service;
-
+    
+    
+	
     @Autowired
     public CustomerController(CustomerService _service) {
         this._service = _service;
@@ -33,6 +36,11 @@ public class CustomerController {
     @PostMapping("/SaveCustomer")
     public ResponseEntity<?> Post(@RequestBody SaveCustomerCommand command, UriComponentsBuilder builder){
         return _service.SaveCustomer(command,builder);
+    }
+    
+    @PostMapping(value = "/login/{name}/{pass}")
+    public Customer login(@PathVariable String name, @PathVariable String pass) {
+    	return _service.login(name,pass);
     }
 
 }
