@@ -7,12 +7,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.helpapi.Domain.Commands.CustomerCommands.Outputs.OccurrenceMapsTO;
 import com.example.helpapi.Domain.Models.Occurrence;
 import com.example.helpapi.Infra.Repository.OccurrenceRepository;
 @Service
@@ -32,6 +34,17 @@ public class OccurrenceService implements IOccurrenceService {
 			o.setImage(encoder(o.getPathFoto()));
 		}
 		return occurreceList ;
+	}
+	
+	public List<OccurrenceMapsTO> findAllMaps(){
+		List<Occurrence> occurreceList = repository.findAll();
+		List<OccurrenceMapsTO> list = new ArrayList<OccurrenceMapsTO>()  ;
+		for(Occurrence o: occurreceList) {
+			o.setImage(encoder(o.getPathFoto()));
+			list.add(new OccurrenceMapsTO(o));
+		}
+		 
+		return   list ;
 	}
 	
 	public Occurrence findByIdandName(int id, String name){

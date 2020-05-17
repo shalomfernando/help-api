@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.example.helpapi.Domain.Commands.CustomerCommands.Outputs.OccurrenceMapsTO;
 import com.example.helpapi.Domain.Models.Customer;
 import com.example.helpapi.Domain.Models.Occurrence;
 import com.example.helpapi.Domain.Services.CustomerService;
@@ -29,6 +30,11 @@ public class OccurrenceController {
 	public List<Occurrence> getOccurrence(){
 		return service.findAll();
 	}
+	@GetMapping("GetOccurrenceMaps")
+	public List<OccurrenceMapsTO> getOccurrenceMaps(){
+		return service.findAllMaps();
+	}
+	
 	@PostMapping("/PostOccurrence")
 	public Occurrence postOccurrence(@RequestBody Occurrence occurrence,UriComponentsBuilder builder) {
 		occurrence.setCustomer(customerService.getThisUser());
