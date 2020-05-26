@@ -5,7 +5,7 @@ public enum Occurrence_type {
 	RBU( "Roubo"   ),
 	ASS( "Assalto" );
 
-	String occurrence_type;
+	String occurrence_type; 
 	
 	Occurrence_type( String occurrence_type ) {
 		this.occurrence_type = occurrence_type;
